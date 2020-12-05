@@ -3,7 +3,6 @@
   gather_facts: true
   vars:
     updatelist: []
-    ansible_winrm_transport: basic
   tasks:
     - debug: var=ansible_facts
 
