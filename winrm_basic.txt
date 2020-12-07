@@ -10,3 +10,7 @@ winrm get winrm/config/Winrs
 ansible_connection: winrm
 ansible_port: 5985
 ansible_winrm_transport: basic
+
+
+Set-Item -Path WSMan:\localhost\Service\Auth\Basic -Value $true
+Set-Item -Path WSMan:\localhost\Service\AllowUnencrypted -Value $true
