@@ -1,0 +1,25 @@
+
+winrm enumerate winrm/config/Listener
+winrm get winrm/config/Service
+winrm get winrm/config/Winrs
+
+winrm set winrm/config/service/auth '@{Basic="true"}'
+winrm set winrm/config/service/auth '@{CredSSP="true"}'
+winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+
+winrm enumerate winrm/config/Listener
+winrm get winrm/config/Service
+winrm get winrm/config/Winrs
+
+or
+
+Set-Item -Path WSMan:\localhost\Service\Auth\Basic -Value $true
+Set-Item -Path WSMan:\localhost\Service\AllowUnencrypted -Value $true
+
+---
+ansible_connection: winrm
+ansible_port: 5985
+ansible_winrm_transport: basic
+
+ansible_winrm_transport: credssp
+
