@@ -18,11 +18,19 @@
           use_backend: yum3
         register: update_result
 
-      - name: create array for updates Red Hat
+      - name: print titles of updates
+        debug: msg=""{{ update_result | json_query(jmesquery) }}""
+        vars:
+          jmesquery: 'results[*].envra'
+
+      - name: print titles of updates
         set_fact:
-          updatelist: "{{ update_result.results | map(attribute='envra') | list }}"
-        register: updatelist_result
-      when: ansible_distribution == "RedHat" or ansible_distribution == "Fedora"  or ansible_distribution == "OracleLinux"
+          updatelist: "{{ update_result | json_query(jmesquery) }}"
+        vars:
+          jmesquery: 'results[*].envra'  
+
+      - debug: var=updatelist   
+    when: ansible_distribution == "RedHat" or ansible_distribution == "Fedora"  or ansible_distribution == "OracleLinux"
 
     - name: update tasks for Ubuntu
       block: 
