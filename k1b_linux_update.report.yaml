@@ -29,12 +29,6 @@
       set_fact:
         date="{{ lookup('pipe','date +%Y-%m-%d-%H-%M-%S') }}"
 
-    - name: Delete old report
-      file:
-        path: /tmp/report-{{ date }}.html
-        state: absent
-      delegate_to: tower-01
-
     - name: Create HTMl report
       template:
         src: report-linux-updates.j2
