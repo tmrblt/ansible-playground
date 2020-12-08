@@ -20,7 +20,7 @@
             <td>{{hostvars[host].ansible_distribution}}</td>
             <td>{{ansible_facts['username']}}</td>
             <td>
-            <td>{{hostvars[host].getent_passwd['username']}}</td>
+            <td>{{ansible_facts.getent_passwd['username']}}</td>
         </tr>
 {% endfor %}
     </tbody>
