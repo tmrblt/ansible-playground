@@ -12,14 +12,14 @@
   - name: set fact user
     set_fact:
       username: "{{ user_name }}"
-
-  - name: set fact result
-    set_fact:
-      checkuser: "{{ result.getent_passwd}}"
   
   - debug: var=getent_passwd
   
   - debug: var=result
+
+  - name: set fact result
+    set_fact:
+      checkuser: "{{ result.getent_passwd }}"
 
   - name: get date
     set_fact:
