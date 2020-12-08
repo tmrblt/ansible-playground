@@ -27,7 +27,7 @@
     
     - name: get date
       set_fact:
-          date="{{ lookup('pipe','date +%Y-%m-%d-%H-%M-%S') }}"
+        date="{{ lookup('pipe','date +%Y-%m-%d-%H-%M-%S') }}"
 
     - name: Delete old report
       file:
