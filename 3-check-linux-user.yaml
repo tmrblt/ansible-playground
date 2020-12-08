@@ -9,6 +9,6 @@
     become: true
     register: result
   
-  - debug: var=getent_password
+  - debug: var=getent_passwd
   
   - debug: var=result
