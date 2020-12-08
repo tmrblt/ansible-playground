@@ -22,7 +22,7 @@
         set_fact:
           updatelist: "{{ update_result.results | map(attribute='envra') | list }}"
         register: updatelist_result
-      when: ansible_distribution == "RedHat" or ansible_distribution == "Fedora"
+      when: ansible_distribution == "RedHat" or ansible_distribution == "Fedora"  or ansible_distribution == "OracleLinux"
 
     - name: update tasks for Ubuntu
       block: 
