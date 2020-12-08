@@ -33,7 +33,7 @@
 
     - name: Create HTMl report
       template:
-        src: report-windows-updates-{{ date }}.j2
-        dest: /tmp/report.html
-      delegate_to: localhost
+        src: report-windows-updates.j2
+        dest: /tmp/report-windows-updates-{{ date }}.html
+      delegate_to: tower01
       run_once: true
