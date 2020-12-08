@@ -10,7 +10,7 @@
         state: latest
       become: true
       when: ansible_distribution == "RedHat" or ansible_distribution == "Fedora"
-
+    
     - name: list updates Red Hat
       yum:
         list: updates
@@ -22,6 +22,10 @@
       command: 'apt list --upgradeable'
       register: update_result
       when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
+
+    - debug: var=ansible_facts.distribution
+
+    - debug: var=update_result
 
     - name: create array for updates Red Hat
       set_fact:
