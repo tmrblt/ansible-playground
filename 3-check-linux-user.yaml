@@ -13,7 +13,9 @@
     set_fact:
       username: "{{ user_name }}"
 
-  
+  - name: set fact result
+    set_fact:
+      checkuser: "{{ result.getent_passwd}}"
   
   - debug: var=getent_passwd
   
