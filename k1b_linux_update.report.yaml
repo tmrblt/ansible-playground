@@ -1,0 +1,33 @@
+- name: Report updates for Windows WMs
+  hosts: all
+  gather_facts: true
+  vars:
+    updatelist: []
+  tasks:
+    - name: list updates
+      yum:
+        list: updates
+        use_backend: yum3
+      register: update_result
+    
+    - debug: var=update_result
+    
+#    - debug: var=ansible_facts
+
+    - name: create array for updates
+      set_fact:
+        updatelist: "{{ update_result.results | map(attribute='envra') | list }}"
+      register: updatelist_result
+    
+    - name: Delete old report
+      file:
+        path: /tmp/report.html
+        state: absent
+      delegate_to: localhost
+
+    - name: Create HTMl report
+      template:
+        src: report-linux-updates.j2
+        dest: /tmp/report.html
+      delegate_to: localhost
+      run_once: true
