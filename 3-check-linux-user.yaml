@@ -6,6 +6,6 @@
       database: passwd
       key: "{{ user_name }}"
       fail_key: False
+    register: getent_password
     become: true
   - debug: var=getent_password 
-  
