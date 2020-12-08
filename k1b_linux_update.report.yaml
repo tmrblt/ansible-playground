@@ -11,25 +11,25 @@
       become: true
       when: ansible_distribution == "RedHat" or ansible_distribution == "Fedora"
 
-    - name: list updates
+    - name: list updates Red Hat
       yum:
         list: updates
         use_backend: yum3
       register: update_result
       when: ansible_distribution == "RedHat" or ansible_distribution == "Fedora"
 
-    - name: list updates
+    - name: list updates Ubuntu
       command: 'apt list --upgradeable'
       register: update_result
       when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
 
-    - name: create array for updates
+    - name: create array for updates Red Hat
       set_fact:
         updatelist: "{{ update_result.results | map(attribute='envra') | list }}"
       register: updatelist_result
       when: ansible_distribution == "RedHat" or ansible_distribution == "Fedora"
 
-    - name: create arrays for update
+    - name: create arrays for update Ubuntu
       set_fact:
         updatelist: "{{ update_result | json_query(jmesquery) }}"
       vars:
