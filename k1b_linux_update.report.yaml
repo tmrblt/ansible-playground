@@ -9,8 +9,6 @@
         name: yum-utils
         state: latest
       become: true
-      become_method: sudo
-      become_user: root
 
     - name: list updates
       yum:
