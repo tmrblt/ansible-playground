@@ -25,15 +25,19 @@
         updatelist: "{{ update_result.results | map(attribute='envra') | list }}"
       register: updatelist_result
     
+    - name: get date
+      set_fact:
+          date="{{ lookup('pipe','date +%Y-%m-%d-%H-%M-%S') }}"
+
     - name: Delete old report
       file:
-        path: /tmp/report.html
+        path: /tmp/report-{{ date }}.html
         state: absent
       delegate_to: tower-01
 
     - name: Create HTMl report
       template:
         src: report-linux-updates.j2
-        dest: /tmp/report.html
+        dest: /tmp/report-{{ date }}.html
       delegate_to: tower-01
       run_once: true
