@@ -9,22 +9,34 @@
         name: yum-utils
         state: latest
       become: true
+      when: ansible_distribution == "RedHat" or ansible_distribution == "Fedora"
 
     - name: list updates
       yum:
         list: updates
         use_backend: yum3
       register: update_result
-    
-    - debug: var=update_result
-    
-#    - debug: var=ansible_facts
+      when: ansible_distribution == "RedHat" or ansible_distribution == "Fedora"
+
+    - name: list updates
+      command: 'apt list --upgradeable'
+      register: update_result
+      when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
 
     - name: create array for updates
       set_fact:
         updatelist: "{{ update_result.results | map(attribute='envra') | list }}"
       register: updatelist_result
-    
+      when: ansible_distribution == "RedHat" or ansible_distribution == "Fedora"
+
+    - name: create arrays for update
+      set_fact:
+        updatelist: "{{ update_result | json_query(jmesquery) }}"
+      vars:
+        jmesquery: 'stdout_lines'
+      when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
+
+
     - name: get date
       set_fact:
         date="{{ lookup('pipe','date +%Y-%m-%d-%H-%M-%S') }}"
