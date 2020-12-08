@@ -16,7 +16,7 @@
         log_path: C:\ansible_wu.txt
       register: update_result
  
-    - debug: var=update_result.stdout
+    - debug: var=update_result
 
     - name: print titles of updates
       debug: msg=""{{ update_result | json_query(jmesquery) }}""
