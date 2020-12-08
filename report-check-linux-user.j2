@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<table>
+    <thead>
+        <tr>
+            <th>Hostname</th>
+            <th>Distribution</th>
+            <th>IP</th>
+            <th>Updates</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for host in groups['linux'] %}
+        <tr>
+            <td>{{hostvars[host].ansible_hostname}}</td>
+            <td>{{hostvars[host].ansible_distribution}}</td>
+            <td>{{ansible_facts['username']}}</td>
+            <td>
+            <td>{%hostvars[host].getentpasswd['username']%}</td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>

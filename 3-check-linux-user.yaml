@@ -9,6 +9,21 @@
     become: true
     register: result
   
+  - name: set fact user
+    set_fact:
+      username: "{{ user_name }}"
+
+  - name: get date
+    set_fact:
+      date="{{ lookup('pipe','date +%Y-%m-%d-%H-%M-%S') }}"
+
+  - name: Create HTMl report
+    template:
+      src: report-check-linux-user.j2
+      dest: /tmp/report-check-linux-user-{{ date }}.html
+    delegate_to: tower-01
+    run_once: true
+  
   - debug: var=getent_passwd
   
   - debug: var=result
