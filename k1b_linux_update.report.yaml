@@ -17,7 +17,7 @@
         use_backend: yum3
       register: update_result
       when: ansible_distribution == "RedHat" or ansible_distribution == "Fedora"
-      
+
     - name: create array for updates Red Hat
       set_fact:
         updatelist: "{{ update_result.results | map(attribute='envra') | list }}"
@@ -36,7 +36,7 @@
         jmesquery: 'stdout_lines'
       when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
 
-    - debug: var=ansible_facts.distribution
+    - debug: var=ansible_facts
 
     - debug: var=update_result
 
