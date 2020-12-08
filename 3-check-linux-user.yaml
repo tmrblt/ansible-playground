@@ -13,6 +13,12 @@
     set_fact:
       username: "{{ user_name }}"
 
+  
+  
+  - debug: var=getent_passwd
+  
+  - debug: var=result
+
   - name: get date
     set_fact:
       date="{{ lookup('pipe','date +%Y-%m-%d-%H-%M-%S') }}"
@@ -23,7 +29,3 @@
       dest: /tmp/report-check-linux-user-{{ date }}.html
     delegate_to: tower-01
     run_once: true
-  
-  - debug: var=getent_passwd
-  
-  - debug: var=result
