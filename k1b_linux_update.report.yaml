@@ -37,10 +37,6 @@
           jmesquery: 'stdout_lines'
       when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
 
-    - debug: var=ansible_facts
-
-    - debug: var=update_result
-
     - name: get date
       set_fact:
         date="{{ lookup('pipe','date +%Y-%m-%d-%H-%M-%S') }}"
