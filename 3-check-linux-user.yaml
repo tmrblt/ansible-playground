@@ -1,7 +1,7 @@
 - name: Check if a Linux user exists
   hosts: all
   vars:
-    updatelist: []
+    checkuser: []
   tasks:
   - name: Check if user exists
     getent:
