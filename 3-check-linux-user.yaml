@@ -19,7 +19,7 @@
 
   - name: set fact result
     set_fact:
-      checkuser: "{{ result.getent_passwd }}"
+      checkuser: "{{ result.ansible_facts.getent_passwd }}"
 
   - name: get date
     set_fact:
