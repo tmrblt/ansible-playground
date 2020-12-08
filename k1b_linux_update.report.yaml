@@ -29,11 +29,11 @@
       file:
         path: /tmp/report.html
         state: absent
-      delegate_to: localhost
+      delegate_to: tower-01
 
     - name: Create HTMl report
       template:
         src: report-linux-updates.j2
         dest: /tmp/report.html
-      delegate_to: localhost
+      delegate_to: tower-01
       run_once: true
