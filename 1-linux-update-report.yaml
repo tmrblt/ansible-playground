@@ -30,7 +30,7 @@
           jmesquery: 'results[*].envra'  
 
       - debug: var=updatelist   
-    when: ansible_distribution == "RedHat" or ansible_distribution == "Fedora"  or ansible_distribution == "OracleLinux"
+      when: ansible_distribution == "RedHat" or ansible_distribution == "Fedora"  or ansible_distribution == "OracleLinux"
 
     - name: update tasks for Ubuntu
       block: 
