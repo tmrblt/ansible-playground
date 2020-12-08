@@ -1,0 +1,9 @@
+- name: Check if a Linux user exists
+- hosts: all
+- tasks:
+  - name: Check if user exists
+    getent:
+      database: passwd
+      key: "{{ user_name }}"
+      fail_key: False
+  - debug: var=getent_password 
