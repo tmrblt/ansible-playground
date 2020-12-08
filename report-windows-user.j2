@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<table>
+    <thead>
+        <tr>
+            <th>Hostname</th>
+            <th>Distribution</th>
+            <th>IP</th>
+            <th>Updates</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for host in groups['windows'] %}
+        <tr>
+            <td>{{hostvars[host].ansible_hostname}}</td>
+            <td>{{hostvars[host].ansible_distribution}}</td>
+            <td>{{ansible_facts['ip_addresses']}}</td>
+            <td>{{hostvars[host].result_user.msg}}</td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>

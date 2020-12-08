@@ -1,0 +1,29 @@
+- name: Report updates for Windows WMs
+  hosts: windows
+  gather_facts: true
+  vars:
+    userstate: ""
+
+  tasks:
+    - name: check user
+      win_user:
+        name: Administrator3
+        state: query
+      register: result_user
+
+    - debug: var=result_user
+    
+#    - debug: var=ansible_facts 
+    
+    - name: Delete old report
+      file:
+        path: /tmp/report.html
+        state: absent
+      delegate_to: localhost
+
+    - name: Create HTMl report
+      template:
+        src: report-windows-user.j2
+        dest: /tmp/report.html
+      delegate_to: localhost
+      run_once: true
