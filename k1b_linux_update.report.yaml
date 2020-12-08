@@ -17,21 +17,17 @@
         use_backend: yum3
       register: update_result
       when: ansible_distribution == "RedHat" or ansible_distribution == "Fedora"
-
-    - name: list updates Ubuntu
-      command: 'apt list --upgradeable'
-      register: update_result
-      when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
-
-    - debug: var=ansible_facts.distribution
-
-    - debug: var=update_result
-
+      
     - name: create array for updates Red Hat
       set_fact:
         updatelist: "{{ update_result.results | map(attribute='envra') | list }}"
       register: updatelist_result
       when: ansible_distribution == "RedHat" or ansible_distribution == "Fedora"
+
+    - name: list updates Ubuntu
+      command: 'apt list --upgradeable'
+      register: update_result
+      when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
 
     - name: create arrays for update Ubuntu
       set_fact:
@@ -40,6 +36,9 @@
         jmesquery: 'stdout_lines'
       when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
 
+    - debug: var=ansible_facts.distribution
+
+    - debug: var=update_result
 
     - name: get date
       set_fact:
