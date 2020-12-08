@@ -35,5 +35,5 @@
       template:
         src: report-windows-updates.j2
         dest: /tmp/report-windows-updates-{{ date }}.html
-      delegate_to: tower01
+      delegate_to: tower-01
       run_once: true
