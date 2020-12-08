@@ -7,5 +7,8 @@
       key: "{{ user_name }}"
       fail_key: False
     become: true
-    
-  - debug: var=getent_password 
+  register: result
+  
+  - debug: var=getent_password
+  
+  - debug: var=result
