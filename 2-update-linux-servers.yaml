@@ -36,7 +36,8 @@
         apt:
           name: "*"
           state: latest
-
+        become: true
+        
       - name: list updates Ubuntu
         command: 'apt list --upgradeable'
         register: update_result
