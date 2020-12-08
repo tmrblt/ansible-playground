@@ -5,4 +5,4 @@
   - name: Test linux ping 
     ping:
   
-  debug: var=ansible_facts.ansible_distribution
+  - debug: var=ansible_facts.ansible_distribution
