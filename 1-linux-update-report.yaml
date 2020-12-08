@@ -6,11 +6,11 @@
   tasks:
     - name: update tasks for Red Hat
       block: 
- #     - name: install yum-utils
- #      yum:
- #         name: yum-utils
- #         state: latest
- #       become: true
+      - name: install yum-utils
+        yum:
+          name: yum-utils
+          state: latest
+        become: true
       
       - name: list updates Red Hat
         yum:
