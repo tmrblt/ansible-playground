@@ -4,6 +4,11 @@
   vars:
     updatelist: []
   tasks:
+    - name: install yum-utils
+      yum:
+        name: yum-utils
+        state: latest
+        
     - name: list updates
       yum:
         list: updates
