@@ -1,4 +1,4 @@
-- name: Report updates for Windows WMs
+- name: Report updates for Linux WMs
   hosts: all
   gather_facts: true
   vars:
