@@ -1,6 +1,5 @@
 - name: Report updates for Windows WMs
   hosts: all
-  become: true
   gather_facts: true
   vars:
     updatelist: []
