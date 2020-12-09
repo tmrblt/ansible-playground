@@ -11,11 +11,13 @@
         state: query
       register: result_user
 
+    - name: set fact user
+      set_fact:
+        username: "{{ username }}"
 
     - name: set user state
       set_fact:
-        user_state: "User does not exist"    
-  
+        user_state: "User does not exist"   
 
     - debug: var=result_user
   
