@@ -19,7 +19,7 @@
             <td>{{hostvars[host].ansible_hostname}}</td>
             <td>{{hostvars[host].ansible_distribution}}</td>
             <td>{{ansible_facts['ip_addresses']}}</td>
-            <td>{{hostvars[host].result_user.msg}}</td>
+            <td>{{hostvars[host].result_user.state}}</td>
         </tr>
 {% endfor %}
     </tbody>

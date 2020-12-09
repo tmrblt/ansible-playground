@@ -2,7 +2,7 @@
   hosts: all
   gather_facts: true
   vars:
-    userstate: ""
+    user_state: ""
     username: "{{ username }}"
   tasks:
     - name: check user
@@ -11,10 +11,24 @@
         state: query
       register: result_user
 
+
+    - name: set user state
+      set_fact:
+        user_state: "User does not exist"    
+  
+
     - debug: var=result_user
     
 #    - debug: var=ansible_facts 
-    
+  
+    - name: set user state
+      set_fact:
+        user_state: User exists
+      when: result_user.state == "present"
+      ignore_errors: yes
+#  - debug: var=ansible_facts.getent_passwd.{{ username }}[3]
+#  - debug: var=username
+  - debug: var=user_state
 
     - name: get date
       set_fact:
