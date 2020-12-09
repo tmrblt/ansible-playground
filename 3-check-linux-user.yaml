@@ -2,7 +2,7 @@
   hosts: linux
   vars:
     checkuser: []
-    username: "root1"
+    username: "{{ username }}"
   tasks:
   - name: Check if user exists
     getent:
