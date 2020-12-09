@@ -39,7 +39,7 @@
   - name: set user state
     set_fact:
       user_state: User exists
-    when: ansible_facts.getent_passwd.{{ username }}[3] == username
+    when: ansible_facts.getent_passwd.{{ username }}[1] is defined
     ignore_errors: yes
 #  - debug: var=ansible_facts.getent_passwd.{{ username }}[3]
 #  - debug: var=username
