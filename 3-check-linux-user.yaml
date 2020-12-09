@@ -1,27 +1,51 @@
 - name: Check if a Linux user exists
-  hosts: all
+  hosts: linux
   vars:
     checkuser: []
+    username: "root1"
   tasks:
   - name: Check if user exists
     getent:
       database: passwd
-      key: "{{ user_name }}"
+      key: "{{ username }}"
       fail_key: False
     become: true
     register: result
   
   - name: set fact user
     set_fact:
-      username: "{{ user_name }}"
+      username: "{{ username }}"
+
+  - name: set user state
+    set_fact:
+      user_state: "User does not exist"    
   
-  - debug: var=getent_passwd
+#  - debug: var=getent_passwd
   
-  - debug: var=result
+#  - debug: var=result
+
+#  - debug: var=ansible_facts.getent_passwd
 
   - name: set fact result
     set_fact:
-      checkuser: "{{ result.ansible_facts.getent_passwd }}"
+      checkuser: "{{ getent_passwd }}"
+
+#  - debug: var=checkuser
+ 
+  - name: set user state
+    set_fact:
+      user_state: User exists
+    when: ansible_facts.getent_passwd.{{ username }}[3] == username
+    ignore_errors: yes
+#  - debug: var=ansible_facts.getent_passwd.{{ username }}[3]
+#  - debug: var=username
+#  - debug: var=user_state
+
+ # - debug: var=ansible_facts.getent_passwd.{{ username }}[3]
+ #  - debug: var=""{{ username }}""
+ # - debug: var="{{ username }}"
+ # - debug: var={{ username }}
+ # - debug: var=username
 
   - name: get date
     set_fact:
@@ -31,5 +55,5 @@
     template:
       src: report-check-linux-user.j2
       dest: /tmp/report-check-linux-user-{{ date }}.html
-    delegate_to: tower-01
+    delegate_to: localhost
     run_once: true

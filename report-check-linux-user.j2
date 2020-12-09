@@ -9,17 +9,17 @@
         <tr>
             <th>Hostname</th>
             <th>Distribution</th>
-            <th>IP</th>
-            <th>Updates</th>
+            <th>Username</th>
+            <th>User state</th>
         </tr>
     </thead>
     <tbody>
-{% for host in groups['Linux'] %}
+{% for host in groups['linux'] %}
         <tr>
             <td>{{hostvars[host].ansible_hostname}}</td>
             <td>{{hostvars[host].ansible_distribution}}</td>
             <td>{{hostvars[host].username}}</td>
-            <td>{{ansible_facts.checkuser['username']}}</td>
+            <td>{{hostvars[host].user_state}}</td>
         </tr>
 {% endfor %}
     </tbody>
