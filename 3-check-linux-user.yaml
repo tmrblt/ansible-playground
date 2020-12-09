@@ -1,5 +1,5 @@
 - name: Check if a Linux user exists
-  hosts: linux
+  hosts: all
   vars:
     checkuser: []
     username: "{{ username }}"
