@@ -20,11 +20,15 @@
     set_fact:
       user_state: "User does not exist"    
   
-#  - debug: var=getent_passwd
+  - debug: var=getent_passwd
   
-#  - debug: var=result
+  - debug: var=result
 
-#  - debug: var=ansible_facts.getent_passwd
+  - debug: var=ansible_facts.getent_passwd
+
+  - debug: var=username
+
+  - debug: var=""{{ username }}""
 
   - name: set fact result
     set_fact:
@@ -39,13 +43,12 @@
     ignore_errors: yes
 #  - debug: var=ansible_facts.getent_passwd.{{ username }}[3]
 #  - debug: var=username
-#  - debug: var=user_state
+  - debug: var=user_state
 
- # - debug: var=ansible_facts.getent_passwd.{{ username }}[3]
- #  - debug: var=""{{ username }}""
+  - debug: var=ansible_facts.getent_passwd.{{ username }}[3]
+  
  # - debug: var="{{ username }}"
  # - debug: var={{ username }}
- # - debug: var=username
 
   - name: get date
     set_fact:
