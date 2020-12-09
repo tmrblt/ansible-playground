@@ -1,13 +1,13 @@
 - name: Report updates for Windows WMs
-  hosts: windows
+  hosts: all
   gather_facts: true
   vars:
     userstate: ""
-
+    username: "{{ username }}"
   tasks:
     - name: check user
       win_user:
-        name: Administrator3
+        name: "{{ username }}"
         state: query
       register: result_user
 
